@@ -1,0 +1,63 @@
+1) What are the advantages and disadvantages of each of the two scheduling policies? 
+   Also, give the advantages and disadvantages of the round robin 
+   scheduling policy originally implemented in Xinu.
+
+Exponential Scheduler:
+
+Advantages:
+
+-> Scheduling is purely based on randomly generated values in an exponential distribution.
+-> Starvation does not occur because the probability of choosing low priority process is high.
+-> We have the control over randomly generated values by changing LAMDA.
+
+Disadvantages:
+
+-> The probabality of choosing a process with highest priority decreases as priority increases due to which
+   starvation may occur.
+-> LAMDA value must be chosen appropriately.
+
+
+Linux Scheduler:
+
+Advantages:
+
+-> Starvation does not occur in this type of scheduling policy as each and every process executes it's quantum time in an epoch.
+-> Process are scheduled based on goodness value, the higher the goodness value the more the probability to get hold of CPU resources.
+-> The process which did not execute it's quantum completely is given higher priority in the next epoch.
+
+Disadvantages:
+
+-> The time complexity to calculate goodness,quantum,counter for each process in the process list is very high.
+-> Additional computing overhead might be required.
+-> Cannot be implemented, as higher priority process must wait until next epoch.
+
+Round Robin policy in default XINU scheduler:
+
+Advantages:
+
+-> Each and every process has an equal probablity to be scheduled.
+-> The highest priority process is scheduled at the beginning.
+-> Quicker and efficient algorithm as there are no computations involved and better response time.
+
+Disadvantages:
+
+-> Lower priority process might starve until higher priority process gets scheduled.
+-> Performance depends on the time quantum, if the value is too slow and result in slower execution.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+2) Describe the way each of the schedulers affects the NULL process.
+
+Exponential Scheduler:
+
+-> The NULL process is scheduled only if there aren't any process in the ready queue.
+
+Linux Scheduler :
+
+-> The NULL process is only allowed to scheduled to run in an EPOCH if there are no process in ready queue for epoch.
+
+Default XINU Scheduler:
+
+-> The NULL process is scheduled if there aren't any process in the ready queue.
+
+-----------------------------------------------------------------------------------------------------------------------------  
